@@ -279,7 +279,11 @@
                     input.blur(function(e) {
                         /* Prevent double submit if submit was clicked. */
                         t = setTimeout(function() {
-                            form.submit();
+                            if (self.revert == input.val()) {
+                                reset.apply(form, [settings, self]);
+                            } else {
+                                form.submit();
+                            }
                         }, 200);
                     });
                 } else if ($.isFunction(settings.onblur)) {
